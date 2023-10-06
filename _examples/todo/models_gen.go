@@ -30,7 +30,8 @@ var AllRole = []Role{
 
 func (e Role) IsValid() bool {
 	switch e {
-	case RoleAdmin, RoleOwner:
+	case RoleAdmin,
+		RoleOwner:
 		return true
 	}
 	return false

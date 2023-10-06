@@ -47,7 +47,8 @@ var AllState = []State{
 
 func (e State) IsValid() bool {
 	switch e {
-	case StateNotYet, StateDone:
+	case StateNotYet,
+		StateDone:
 		return true
 	}
 	return false
