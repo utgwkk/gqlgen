@@ -211,6 +211,7 @@ func Funcs() template.FuncMap {
 		"goPrivate":          ToGoPrivate,
 		"goModelName":        ToGoModelName,
 		"goPrivateModelName": ToGoPrivateModelName,
+		"isLastIndex":        isLastIndex,
 		"add": func(a, b int) int {
 			return a + b
 		},
@@ -569,6 +570,14 @@ func notNil(field string, data interface{}) bool {
 	val := v.FieldByName(field)
 
 	return val.IsValid() && !val.IsNil()
+}
+
+func isLastIndex(val interface{}, index int) bool {
+	rVal := reflect.ValueOf(val)
+	if rVal.Kind() != reflect.Slice && rVal.Kind() != reflect.Array && rVal.Kind() != reflect.Map && rVal.Kind() != reflect.String {
+		return false
+	}
+	return index == rVal.Len()-1
 }
 
 func Dump(val interface{}) string {

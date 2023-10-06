@@ -74,7 +74,9 @@
 
 	func (e {{ goModelName .Name }}) IsValid() bool {
 		switch e {
-		case {{ range $index, $element := .Values}}{{if $index}},{{end}}{{ goModelName $enum.Name $element.Name }}{{end}}:
+		{{- $enumValues := .Values }}
+		case {{ range $index, $element := .Values}}{{ goModelName $enum.Name $element.Name }}{{ if not (isLastIndex $enumValues $index) }},
+		{{ end }}{{ end }}:
 			return true
 		}
 		return false
